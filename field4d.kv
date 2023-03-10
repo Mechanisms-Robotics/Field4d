@@ -1,0 +1,103 @@
+#:kivy 1.0.9
+
+<Field>:
+	grid: grid
+
+	Background:
+		id: background
+		source: 'field23.png'
+		allow_stretch: True
+		size: self.parent.size
+		offset: [self.center_x - (self.norm_image_size[0]/2), self.center_y - (self.norm_image_size[1]/2)]
+		magnification: self.norm_image_size[0] / self.texture_size[0]
+
+		Bounds:
+			canvas:
+				Color:
+					rgba: 0, 0, 0, 0
+				Rectangle:
+					size: self.size
+					pos: (0, 0)
+
+			pos: self.parent.offset
+			size: self.parent.norm_image_size
+
+			Grid:
+				id: grid
+				pos: (0, 0)
+				size_hint: None, None
+				size: self.parent.width * 0.08625, self.parent.height * 0.6875
+
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+				Node:
+					size_hint: None, None
+
+
+<Grid>:
+	canvas:
+		Color:
+			rgba: 1, 1, 1, 0.0
+		Rectangle:
+			pos: self.pos
+			size: self.size
+
+<Node>:
+	canvas:
+		Color:
+			rgba: self.r, self.g, self.b, self.a
+		Ellipse:
+			pos: (self.pos[0] + self.parent.width * 0.6875) - (self.parent.width * self.offset_x), (self.pos[1] + self.parent.height * 0.0625) + (self.parent.height * self.offset_y)
+			size: self.parent.width * 0.25, self.parent.width * 0.25
