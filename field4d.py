@@ -23,7 +23,7 @@ from networktables import NetworkTables
 NODE_X_OFFSET = 0.275
 NODE_Y_OFFSET = 0.10125
 
-LOCALHOST = True
+LOCALHOST = False
 
 IP = '127.0.0.1' if LOCALHOST else '10.87.36.2'
 
@@ -41,6 +41,8 @@ best = [0, 0]
 
 smart_dashboard = None
 grid_analyzer = GridAnalyzer()
+
+override_inputs = False
 ### Globals ###
 
 
@@ -62,7 +64,12 @@ class Bounds(RelativeLayout):
 ### Grid ###
 class Grid(RelativeLayout):
     def update_hat(self, _a, joy_id, _c, value):
+        global override_inputs
+
         if joy_id != JOYSTICK_ID:
+            return
+
+        if override_inputs:
             return
 
         desired = selected
@@ -80,11 +87,18 @@ class Grid(RelativeLayout):
         selected[0] = 0 if desired[0] < 0 else (2 if desired[0] > 2 else desired[0])
         selected[1] = 0 if desired[1] < 0 else (8 if desired[1] > 8 else desired[1])
 
-    def update_button(self, _a, _b, value):
+    def update_button(self, _a, joy_id, value):
+        global override_inputs
+        global grid_analyzer
+
         if joy_id != JOYSTICK_ID:
             return
 
-        global grid_analyzer
+        if value == 3:
+            override_inputs = not override_inputs
+
+        if override_inputs:
+            return
 
         if value == 0:
             for child in self.children:
