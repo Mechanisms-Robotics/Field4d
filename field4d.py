@@ -97,6 +97,12 @@ class Grid(RelativeLayout):
         if value == 3:
             override_inputs = not override_inputs
 
+        if value == 4:
+            override_inputs = False
+
+        if value == 5:
+            override_inputs = True
+
         if override_inputs:
             return
 
