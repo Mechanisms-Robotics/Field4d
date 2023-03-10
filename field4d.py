@@ -26,6 +26,8 @@ NODE_Y_OFFSET = 0.10125
 LOCALHOST = True
 
 IP = '127.0.0.1' if LOCALHOST else '10.87.36.2'
+
+JOYSTICK_ID = 1
 ### Constants ###
 
 # 
@@ -59,8 +61,9 @@ class Bounds(RelativeLayout):
 
 ### Grid ###
 class Grid(RelativeLayout):
-    def update_hat(self, _a, _b, _c, value):
-        global selected
+    def update_hat(self, _a, joy_id, _c, value):
+        if joy_id != JOYSTICK_ID:
+            return
 
         desired = selected
 
@@ -78,6 +81,9 @@ class Grid(RelativeLayout):
         selected[1] = 0 if desired[1] < 0 else (8 if desired[1] > 8 else desired[1])
 
     def update_button(self, _a, _b, value):
+        if joy_id != JOYSTICK_ID:
+            return
+
         global grid_analyzer
 
         if value == 0:
